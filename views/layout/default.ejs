@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<%- include(`./partials/header`) %>
+
+<body>
+<div class="container-fluid g-0">
+    <div class="">
+        <%- include(`./partials/navbar`) %>
+    </div>
+
+    <div class="content">
+
+        <div class="row g-0" style="height: 100vh">
+
+            <div class="main-column col-xl-10">
+                <%- include(`../pages/${template}`) %>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div>
+    <%- include(`./partials/footer`) %>
+</div>
+</body>
+
+<%- include(`./partials/scripts`) %>
+</html>

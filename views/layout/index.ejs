@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Kiwi Cars</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row" x-data="{ searchResults: [], showSearchResults: false}">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/images/BigLogo.png"
+                             style="max-height: 50px; height: auto; width: auto; margin-left: 50px"
+                             alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input" style="width: 100% !important;">
+                        <form id="search" action="#">
+                            <input type="text" style="width: 100% !important;"
+                                   placeholder="Search Something Brand, Make, VIN"
+                                   id='searchText' name="searchKeyword"
+                                   @keyup="showSearchResults = showResultsState($el); searchResults = await updateSearchList($el)">
+                            <i class="fa fa-search"></i>
+                        </form>
+                        <div class="bg-white rounded-4 p-3" x-transition x-show="showSearchResults">
+                            <template x-for="car in searchResults">
+                                <p x-text="car.vin + ' - ' + car.make + ' ' + car.model" class="m-3"></p>
+                            </template>
+                            <a href="" class="p-3">Show all results</a>
+                        </div>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+
+                <!-- ***** Banner Start ***** -->
+                <div class="main-banner">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="header-text">
+                                <h6>Welcome To Cyborg</h6>
+                                <h4><em>Browse</em> Our Popular Games Here</h4>
+                                <div class="main-button">
+                                    <a href="browse.html">Browse Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Banner End ***** -->
+
+                <!-- ***** Most Popular Start ***** -->
+                <div class="most-popular">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heading-section">
+                                <h4><em>Most Popular</em> Right Now</h4>
+                            </div>
+                            <div class="row">
+                                <% for (let car of cars) { %>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="item">
+                                            <img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt="">
+                                            <h4><%= car.make; %><br><span><%= car.model + ' ' + car.year %></span></h4>
+                                            <ul>
+                                                <li><i class="fa fa-car"></i><%= car.condition %></li>
+                                                <li><i class="fa fa-eye"></i> 2.3M</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <div class="col-lg-12">
+                                    <div class="main-button">
+                                        <a href="browse.html">Discover Popular</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Most Popular End ***** -->
+
+                <!-- ***** Gaming Library Start ***** -->
+                <div class="gaming-library">
+                    <div class="col-lg-12">
+                        <div class="heading-section">
+                            <h4><em>Latest Sold</em> Cars</h4>
+                        </div>
+                        <% for (let car of latestCars) { %>
+                            <div class="item">
+                                <ul>
+                                    <li><img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt=""
+                                             class="templatemo-item"></li>
+                                    <li><h4>
+                                            <% car.make %>
+                                        </h4><span>
+                                            <% car.model %>
+                                            <% car.year %>
+                                        </span></li>
+                                    <li><h4>Sale Date</h4>
+                                        <span><%= new Date(car.saleDate).getDay() %>/<%= new Date(car.saleDate).getMonth() %>/<%= new Date(car.saleDate).getFullYear() %></span>
+                                    </li>
+                                    <li><h4>Odometer</h4><span><%= car.odo %></span></li>
+                                    <li><h4>Currently</h4><span>Downloaded</span></li>
+                                    <li>
+                                        <div class="main-border-button"><a href="#">Show full details</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        <% } %>
+                        <div class="item last-item">
+                            <ul>
+                                <li><img src="assets/images/game-03.jpg" alt="" class="templatemo-item"></li>
+                                <li><h4>CS-GO</h4><span>Sandbox</span></li>
+                                <li><h4>Date Added</h4><span>21/04/2036</span></li>
+                                <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
+                                <li><h4>Currently</h4><span>Downloaded</span></li>
+                                <li>
+                                    <div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="main-button">
+                            <a href="profile.html">View Your Library</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Gaming Library End ***** -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+
+                    <br>Design: <a href="https://templatemo.com" target="_blank"
+                                   title="free CSS templates">TemplateMo</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/isotope.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+<script>
+
+  function showResultsState(element) {
+    return element.value.length >= 3;
+  }
+
+  function sleepWithAbort(ms) {
+    let timeoutId;
+
+    const sleepPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(resolve, ms);
+    });
+
+    // Add an "abort" method to the promise
+    sleepPromise.abort = function () {
+      clearTimeout(timeoutId);
+    };
+
+    return sleepPromise;
+  }
+
+  let sleepPromise = sleepWithAbort(2000);
+
+  const updateSearchList = async (element) => {
+    sleepPromise.abort();
+    if (element.value.length >= 3) {
+      sleepPromise = sleepWithAbort(200);
+      await sleepPromise;
+      try {
+        // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint URL
+        const response = await axios.get(
+          '/cars?car_search=' + element.value + '&limit=5',
+        );
+        console.log(response.data.data);
+        return response.data.data; // Return the API response data
+      } catch (error) {
+        console.error('Error sending request to API:', error);
+        return [];
+      }
+    }
+
+  };
+</script>
+
+</body>
+
+</html>
