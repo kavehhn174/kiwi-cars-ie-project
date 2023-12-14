@@ -1,0 +1,277 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Kiwi Cars</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+<style>
+    .features {
+        color: #D2639D
+    }
+</style>
+<!--Page Content-->
+<div class="container mt-5">
+    <h1>Editing Car VIN: <%= car.vin %></h1>
+</div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content" style="margin-top: 60px!important;">
+                <button class="mb-5"
+                        onclick="window.location.assign('/home')"
+                        style="border-radius: 100%!important; font-size: 24px; background-color: #e75e8d; border: none; width: 40px; height: 40px; color: white">
+                    <i class="fa-solid fa-caret-left"></i>
+                </button>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="d-inline features" contenteditable="true" spellcheck="false"
+                            id="carMake"><%= car.make %> </h3>
+                        <h3 class="d-inline" contenteditable="true" spellcheck="false"
+                            id="carModel"><%= car.model %></h3>
+                        <h3 class="d-inline" contenteditable="true" spellcheck="false" id="carYear"><%= car.year %></h3>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Trim : </h5>
+                            <h6 class="d-inline" contenteditable="true" spellcheck="false"
+                                id="carTrim"><%= car.trim %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Body : </h5>
+                            <h6 class="d-inline" contenteditable="true" spellcheck="false"
+                                id="carBody"><%= car.body %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Transmission : </h5>
+                            <h6 class="d-inline" contenteditable="true" id="carTransmission"
+                                spellcheck="false"><%= car.transmission %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Condition : </h5>
+                            <h6 class="d-inline" contenteditable="true" id="carCondition"
+                                spellcheck="false"><%= car.condition %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Odometer : </h5>
+                            <h6 class="d-inline" contenteditable="true" id="carOdo"
+                                spellcheck="false"><%= car.odo %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Color : </h5>
+                            <h6 class="d-inline " contenteditable="true" id="carColor"
+                                spellcheck="false"><%= car.color %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Price : </h5>
+                            <h6 class="d-inline " contenteditable="true" id="carPrice"
+                                spellcheck="false"><%= car.price %></h6>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Sale Date : </h5>
+                            <h6 class="d-inline " contenteditable="true" id="carSaleDate"
+                                spellcheck="false"><%= car.saleDate %></h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt="">
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <div class="main-button mt-5 fw-bold">
+                        <a onclick="SaveCarData()" style="cursor:pointer;">Save Changes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/isotope.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://kit.fontawesome.com/5d3be9dc63.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  const savedToast = Toastify({
+    text: 'Changes Saved Successfully.',
+    duration: 3000,
+    close: true,
+    gravity: 'top', // `top` or `bottom`
+    position: 'right', // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    // style: {
+    //   background: 'linear-gradient(to right, #00b09b, #96c93d)',
+    // },
+    onClick: function () {
+    } // Callback after click
+  });
+
+  const failedToast = Toastify({
+    text: 'Failed To Save Changes.',
+    duration: 3000,
+    close: true,
+    gravity: 'bottom', // `top` or `bottom`
+    position: 'center', // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: 'linear-gradient(to right, #b00075, #c93d3f)',
+    },
+    onClick: function () {
+    } // Callback after click
+  });
+
+  const textFailedToast = (text) => {
+    return Toastify({
+      text,
+      duration: 3000,
+      close: true,
+      gravity: 'bottom', // `top` or `bottom`
+      position: 'center', // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: 'linear-gradient(to right, #b00075, #c93d3f)',
+      },
+      onClick: function () {
+      } // Callback after click
+    });
+  };
+
+  async function SaveCarData() {
+    let isOK = true;
+    const dataValidator = {
+      make: true,
+      model: true,
+      year: true,
+      trim: true,
+      body: true,
+      transmission: true,
+      condition: true,
+      odo: true,
+      color: true,
+      price: true,
+      saleDate: true,
+    };
+    const data = {
+      make: document.getElementById('carMake').innerText,
+      model: document.getElementById('carModel').innerText,
+      year: document.getElementById('carYear').innerText,
+      trim: document.getElementById('carTrim').innerText,
+      body: document.getElementById('carBody').innerText,
+      transmission: document.getElementById('carTransmission').innerText,
+      condition: document.getElementById('carCondition').innerText,
+      odo: document.getElementById('carOdo').innerText,
+      color: document.getElementById('carColor').innerText,
+      price: document.getElementById('carPrice').innerText,
+      saleDate: document.getElementById('carSaleDate').innerText,
+    };
+
+    data.year = parseInt(data.year);
+    if (isNaN(data.year)) {
+      dataValidator.year = false;
+      isOK = false;
+    }
+
+    data.condition = parseFloat(parseFloat(data.condition)
+      .toFixed(2));
+    if (isNaN(data.condition)) {
+      dataValidator.condition = false;
+      isOK = false;
+    }
+
+    data.odo = parseInt(data.odo);
+    if (isNaN(data.odo)) {
+      dataValidator.odo = false;
+      isOK = false;
+
+    }
+
+    data.price = parseInt(data.price);
+    if (isNaN(data.price)) {
+      dataValidator.odo = false;
+      isOK = false;
+    }
+
+    try {
+      data.saleDate = new Date(data.saleDate).toISOString();
+    } catch (err) {
+      isOK = false;
+      dataValidator.date = false;
+    }
+
+    const validatorKeys = Object.keys(dataValidator);
+    for (let data of validatorKeys) {
+      if (dataValidator[data] === false) {
+        isOK = false;
+        textFailedToast(`Entered ${data} is wrong`)
+          .showToast();
+        break;
+      }
+    }
+
+    if (isOK) {
+      let config = {
+        method: 'POST',
+        url: '/cars/' + '<%= car.id %>',
+        data: data
+      };
+
+      console.log(data);
+      try {
+        const response = await axios(config);
+        if (response) {
+          savedToast.showToast();
+          console.log(response);
+        }
+      } catch (error) {
+        failedToast.showToast();
+        console.error(error);
+      }
+    }
+
+
+  }
+</script>
+

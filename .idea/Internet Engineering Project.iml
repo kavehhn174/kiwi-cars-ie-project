@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="toastify-js" level="application" />
+    <orderEntry type="library" name="5d3be9dc63" level="application" />
+    <orderEntry type="library" name="axios" level="application" />
   </component>
 </module>

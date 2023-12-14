@@ -1,0 +1,160 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Kiwi Cars</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+<style>
+    .features {
+        color: #D2639D
+    }
+</style>
+<!--Page Content-->
+<div class="container mt-5">
+    <h1 class="my-3">Browsing Cars</h1>
+    <h3 class="my-3">Page <%= pageNumber %></h3>
+    <% if (carSearch) { %>
+        <h5 class="my-3">Searching for : "<%= queries.car_search %>"</h5>
+    <% } %>
+</div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content" style="margin-top: 60px!important;">
+                <button class=""
+                        onclick="window.location.assign('/home')"
+                        style="border-radius: 100%!important; font-size: 24px; background-color: #e75e8d; border: none; width: 40px; height: 40px; color: white">
+                    <i class="fa-solid fa-caret-left"></i>
+                </button>
+                <div class="most-popular">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <% for (let car of cars) { %>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="item">
+                                            <img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt=""
+                                                 style="cursor: pointer"
+                                                 onclick="window.open('/edit-car/' + '<%= car.id %>', '_blank')">
+                                            <h4><%= car.make; %><br><span><%= car.model + ' ' + car.year %></span></h4>
+                                            <ul>
+                                                <li><i class="fa fa-car"></i><%= car.condition %></li>
+                                                <li><i class="fa fa-eye"></i> 2.3M</li>
+                                            </ul>
+                                            <div>
+                                                <div class="main-button mt-2 fw-bold">
+                                                    <a href="/edit-car/<%= car.id %>" style="cursor:pointer;">Edit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <div class="d-flex justify-content-center">
+                                    <div class="d-flex flex-row mt-4">
+                                        <div class="main-button mx-2">
+                                            <a :hidden="parseInt('<%= pageNumber %>') === 1)"
+                                               href="/browse?page=<%= pageNumber - 1 %>">Previous</a>
+                                        </div>
+                                        <div class="main-button mx-2">
+                                            <a href="/browse?page=<%= pageNumber + 1 %>">Next</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex justify-content-center m-5">
+                    <div class="main-button mx-2">
+                        <!--                        <a onclick="exportCSVRequest()" style="background-color: yellow; color: #1e1e1e">Export-->
+                        <!--                            CSV</a>-->
+                        <a href="/tools/export-csv?<%= new URLSearchParams(queries).toString(); %>"
+                           style="background-color: yellow; color: #1e1e1e">Export
+                            CSV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/isotope.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+<!--<script src="//unpkg.com/alpinejs" defer></script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://kit.fontawesome.com/5d3be9dc63.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+
+  async function exportCSVRequest() {
+    const queries = <%- JSON.stringify(queries) %>;
+    let config = {
+      method: 'POST',
+      url: '/tools/export-csv/',
+      params: queries,
+      // responseType: 'blob'
+    };
+
+    console.log(config);
+    try {
+      const response = await axios(config);
+      if (response) {
+        // savedToast.showToast();
+        console.log(response);
+      }
+    } catch (error) {
+      // failedToast.showToast();
+      console.error(error);
+    }
+  }
+
+</script>
+

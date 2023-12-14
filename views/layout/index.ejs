@@ -72,7 +72,7 @@
                             <template x-for="car in searchResults">
                                 <p x-text="car.vin + ' - ' + car.make + ' ' + car.model" class="m-3"></p>
                             </template>
-                            <a href="" class="p-3">Show all results</a>
+                            <a onclick="showAllResults()" class="p-3" style="cursor:pointer;">Show all results</a>
                         </div>
                     </div>
                     <!-- ***** Search End ***** -->
@@ -98,10 +98,10 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h6>Welcome To Cyborg</h6>
-                                <h4><em>Browse</em> Our Popular Games Here</h4>
+                                <h6>Welcome To Kiwi Cars</h6>
+                                <h4><em>Browse</em> Our Used Cars Here</h4>
                                 <div class="main-button">
-                                    <a href="browse.html">Browse Now</a>
+                                    <a href="browse">Browse Now</a>
                                 </div>
                             </div>
                         </div>
@@ -120,19 +120,26 @@
                                 <% for (let car of cars) { %>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="item">
-                                            <img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt="">
+                                            <img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt=""
+                                                 style="cursor: pointer"
+                                                 onclick="window.open('/edit-car/' + '<%= car.id %>', '_blank')">
                                             <h4><%= car.make; %><br><span><%= car.model + ' ' + car.year %></span></h4>
                                             <ul>
                                                 <li><i class="fa fa-car"></i><%= car.condition %></li>
                                                 <li><i class="fa fa-eye"></i> 2.3M</li>
                                             </ul>
+                                            <div>
+                                                <div class="main-button mt-2 fw-bold">
+                                                    <a href="/edit-car/<%= car.id %>" style="cursor:pointer;">Edit</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 <% } %>
 
                                 <div class="col-lg-12">
                                     <div class="main-button">
-                                        <a href="browse.html">Discover Popular</a>
+                                        <a href="browse">Discover Popular</a>
                                     </div>
                                 </div>
                             </div>
@@ -153,38 +160,26 @@
                                     <li><img src="<%= '/images/' + car.imageNumber + '.png'; %>" alt=""
                                              class="templatemo-item"></li>
                                     <li><h4>
-                                            <% car.make %>
+                                            <%= car.make %>
                                         </h4><span>
-                                            <% car.model %>
-                                            <% car.year %>
+                                            <%= car.model %>
+                                            <%= car.year %>
                                         </span></li>
                                     <li><h4>Sale Date</h4>
                                         <span><%= new Date(car.saleDate).getDay() %>/<%= new Date(car.saleDate).getMonth() %>/<%= new Date(car.saleDate).getFullYear() %></span>
                                     </li>
                                     <li><h4>Odometer</h4><span><%= car.odo %></span></li>
-                                    <li><h4>Currently</h4><span>Downloaded</span></li>
+                                    <li><h4>Vin</h4><span><%= car.vin %></span></li>
                                     <li>
-                                        <div class="main-border-button"><a href="#">Show full details</a></div>
+                                        <div class="main-border-button"><a href="#">Full details</a></div>
                                     </li>
                                 </ul>
                             </div>
                         <% } %>
-                        <div class="item last-item">
-                            <ul>
-                                <li><img src="assets/images/game-03.jpg" alt="" class="templatemo-item"></li>
-                                <li><h4>CS-GO</h4><span>Sandbox</span></li>
-                                <li><h4>Date Added</h4><span>21/04/2036</span></li>
-                                <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
-                                <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li>
-                                    <div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="main-button">
-                            <a href="profile.html">View Your Library</a>
+                            <a href="profile.html">View All Cars</a>
                         </div>
                     </div>
                 </div>
@@ -198,10 +193,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
-
-                    <br>Design: <a href="https://templatemo.com" target="_blank"
-                                   title="free CSS templates">TemplateMo</a></p>
+                <p>Copyright © 2023 <a href="#">Kiwi Cars</a> Company. All rights reserved.
             </div>
         </div>
     </div>
@@ -221,6 +213,11 @@
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
 <script>
+
+  function showAllResults() {
+    const text = document.getElementById('searchText').value;
+    window.location.assign('/browse?page=1&car_search=' + text);
+  }
 
   function showResultsState(element) {
     return element.value.length >= 3;

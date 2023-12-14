@@ -38,7 +38,7 @@ const createCar = catchAsync(async (req, res, next) => {
 });
 
 const getCar = catchAsync(async (req, res, next) => {
-  await brandExtractor();
+  // await brandExtractor();
 
   const car = await Car.findById(req.params.id);
 
@@ -93,6 +93,26 @@ const deleteCar = catchAsync(async (req, res, next) => {
     .json({
       status: 'success',
       data: null,
+    });
+});
+
+const exportCSV = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(
+    Car.find(),
+    req.query
+  )
+    .filter()
+    .cars()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const cars = await features.query;
+
+  res.status(200)
+    .json({
+      status: 'success',
+      data: cars,
     });
 });
 
@@ -214,6 +234,7 @@ module.exports = {
   createCar,
   deleteCar,
   updateCar,
+  exportCSV,
   getCar,
   loadCarDataToDB,
   brandExtractor,

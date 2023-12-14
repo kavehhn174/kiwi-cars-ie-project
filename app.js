@@ -4,19 +4,16 @@ const globalErrorHandler = require('./controllers/globalErrorHandler');
 
 const carsRouter = require('./routers/cars');
 const frontEndRouter = require('./routers/frontend');
+const toolsRouter = require('./routers/tools');
 
 const express = require('express');
 
 const bodyParser = require('body-parser');
 const { connect } = require('mongoose');
-const { default: axios } = require('axios');
 
 const port = process.env.PORT || 3000;
 
 const app = express();
-
-app.use('/cars', carsRouter);
-app.use('/', frontEndRouter);
 
 
 app.use(
@@ -28,6 +25,10 @@ app.use(
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
+app.use('/cars', carsRouter);
+app.use('/', frontEndRouter);
+app.use('/tools', toolsRouter);
 
 app.listen(port, async () => {
   await connect(process.env.MONGODB_URL);
