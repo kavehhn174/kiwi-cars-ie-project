@@ -45,6 +45,16 @@
     .features {
         color: #D2639D
     }
+
+    .save-button {
+        background-color: #6fd9aa !important;
+        color: black !important;
+    }
+
+    .save-button:hover {
+        background-color: #ffffff !important;
+        color: #4caf85 !important;
+    }
 </style>
 <!--Page Content-->
 <div class="container mt-5">
@@ -114,7 +124,10 @@
                 </div>
                 <div class="d-flex flex-row-reverse">
                     <div class="main-button mt-5 fw-bold">
-                        <a onclick="SaveCarData()" style="cursor:pointer;">Save Changes</a>
+                        <a class="save-button" onclick="SaveCarData()" style="cursor:pointer;">Save Changes</a>
+                    </div>
+                    <div class="main-button mt-5 mx-5 fw-bold">
+                        <a class="" onclick="DeleteCar()" style="cursor:pointer;">Delete Car</a>
                     </div>
                 </div>
             </div>
@@ -153,8 +166,8 @@
     text: 'Failed To Save Changes.',
     duration: 3000,
     close: true,
-    gravity: 'bottom', // `top` or `bottom`
-    position: 'center', // `left`, `center` or `right`
+    gravity: 'top', // `top` or `bottom`
+    position: 'right', // `left`, `center` or `right`
     stopOnFocus: true, // Prevents dismissing of toast on hover
     style: {
       background: 'linear-gradient(to right, #b00075, #c93d3f)',
@@ -168,8 +181,8 @@
       text,
       duration: 3000,
       close: true,
-      gravity: 'bottom', // `top` or `bottom`
-      position: 'center', // `left`, `center` or `right`
+      gravity: 'top', // `top` or `bottom`
+      position: 'right', // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       style: {
         background: 'linear-gradient(to right, #b00075, #c93d3f)',
@@ -272,6 +285,30 @@
     }
 
 
+  }
+
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  async function DeleteCar() {
+    let config = {
+      method: 'DELETE',
+      url: '/cars/' + '<%= car.id %>',
+    };
+
+    try {
+      const response = await axios(config);
+      if (response) {
+        textFailedToast('Car deleted successfully.')
+          .showToast();
+        console.log(response);
+        await sleep(1000);
+        window.location.assign('/home');
+
+      }
+    } catch (error) {
+      failedToast.showToast();
+      console.error(error);
+    }
   }
 </script>
 

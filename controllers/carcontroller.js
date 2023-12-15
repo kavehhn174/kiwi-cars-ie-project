@@ -76,18 +76,7 @@ const updateCar = catchAsync(async (req, res, next) => {
 });
 
 const deleteCar = catchAsync(async (req, res, next) => {
-  const car = await Car.findByIdAndUpdate(req.params.id, {
-    isTrash: true,
-  });
-
-  if (!car) {
-    return next(
-      new AppError(
-        '',
-        404
-      )
-    );
-  }
+  await Car.findByIdAndDelete(req.params.id, {});
 
   res.status(204)
     .json({

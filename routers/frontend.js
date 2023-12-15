@@ -46,6 +46,22 @@ router.get(
 );
 
 router.get(
+  '/create-car', async function (req, res) {
+    try {
+      const template = '/edit-car';
+      const pageTitle = 'Create Car';
+      res.render('pages/create-car', {
+        template,
+        pageTitle
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+);
+
+router.get(
   '/browse', async function (req, res) {
 
     try {
