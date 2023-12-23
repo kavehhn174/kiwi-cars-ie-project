@@ -1,0 +1,198 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Kiwi Cars</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+<style>
+    .features {
+        color: #D2639D
+    }
+
+    .theme-input {
+        background-color: #1F2122;
+        border-radius: 30px;
+        border: 1px solid #D2639D;
+        transition: all 0.1s ease-in-out;
+        color: white;
+        padding: 3px 10px;
+        margin-left: 10px;
+    }
+
+    textarea:focus,
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="datetime"]:focus,
+    input[type="datetime-local"]:focus,
+    input[type="date"]:focus,
+    input[type="month"]:focus,
+    input[type="time"]:focus,
+    input[type="week"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    input[type="search"]:focus,
+    input[type="tel"]:focus,
+    input[type="color"]:focus,
+    .uneditable-input:focus {
+        border-color: #D2639D;
+        box-shadow: 0 1px 1px #D2639D inset, 0 0 8px #D2639D;
+        outline: 0 none;
+    }
+</style>
+<!--Page Content-->
+<div class="container mt-5">
+    <h1>Create New Car</h1>
+</div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content" style="margin-top: 60px!important;">
+                <button class="mb-5"
+                        onclick="window.location.assign('/home')"
+                        style="border-radius: 100%!important; font-size: 24px; background-color: #e75e8d; border: none; width: 40px; height: 40px; color: white">
+                    <i class="fa-solid fa-caret-left"></i>
+                </button>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mt-3">
+                            <h5 class="d-inline features">Write File URL : </h5>
+                            <input class="d-inline theme-input" type="text" spellcheck="false" id="csvFile"
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <div class="main-button mt-5 fw-bold">
+                        <a onclick="ImportCSV()" style="cursor:pointer;">Import CSV File</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/isotope.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://kit.fontawesome.com/5d3be9dc63.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+
+
+  const savedToast = Toastify({
+    text: 'Changes Saved Successfully.',
+    duration: 3000,
+    close: true,
+    gravity: 'top', // `top` or `bottom`
+    position: 'right', // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    // style: {
+    //   background: 'linear-gradient(to right, #00b09b, #96c93d)',
+    // },
+    onClick: function () {
+    } // Callback after click
+  });
+
+  const failedToast = Toastify({
+    text: 'Failed To Save Changes.',
+    duration: 3000,
+    close: true,
+    gravity: 'bottom', // `top` or `bottom`
+    position: 'center', // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: 'linear-gradient(to right, #b00075, #c93d3f)',
+    },
+    onClick: function () {
+    } // Callback after click
+  });
+
+  const textFailedToast = (text) => {
+    return Toastify({
+      text,
+      duration: 3000,
+      close: true,
+      gravity: 'bottom', // `top` or `bottom`
+      position: 'center', // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: 'linear-gradient(to right, #b00075, #c93d3f)',
+      },
+      onClick: function () {
+      } // Callback after click
+    });
+  };
+
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  async function ImportCSV(event) {
+
+    const csvURL = document.getElementById('csvFile');
+
+    // csvURL.value = csvURL.value.replaceAll('/', '//');
+    let config = {
+      method: 'POST',
+      url: '/cars/loadData?filePath=' + csvURL.value,
+    };
+
+
+    try {
+      const response = await axios(config);
+      savedToast.showToast();
+      console.log(response);
+      await sleep(1000);
+      window.location.assign('/home');
+    } catch (error) {
+      failedToast.showToast();
+      console.error(error);
+    }
+
+
+  }
+</script>
+

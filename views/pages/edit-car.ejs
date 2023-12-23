@@ -58,7 +58,7 @@
 </style>
 <!--Page Content-->
 <div class="container mt-5">
-    <h1>Editing Car VIN: <%= car.vin %></h1>
+    <h1>Editing Car VIN: <%= car.vin; %></h1>
 </div>
 <body>
 <div class="container">
@@ -73,49 +73,50 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3 class="d-inline features" contenteditable="true" spellcheck="false"
-                            id="carMake"><%= car.make %> </h3>
+                            id="carMake"><%= car.make; %> </h3>
                         <h3 class="d-inline" contenteditable="true" spellcheck="false"
-                            id="carModel"><%= car.model %></h3>
-                        <h3 class="d-inline" contenteditable="true" spellcheck="false" id="carYear"><%= car.year %></h3>
+                            id="carModel"><%= car.model; %></h3>
+                        <h3 class="d-inline" contenteditable="true" spellcheck="false"
+                            id="carYear"><%= car.year; %></h3>
                         <div class="mt-3">
                             <h5 class="d-inline features">Trim : </h5>
                             <h6 class="d-inline" contenteditable="true" spellcheck="false"
-                                id="carTrim"><%= car.trim %></h6>
+                                id="carTrim"><%= car.trim; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Body : </h5>
                             <h6 class="d-inline" contenteditable="true" spellcheck="false"
-                                id="carBody"><%= car.body %></h6>
+                                id="carBody"><%= car.body; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Transmission : </h5>
                             <h6 class="d-inline" contenteditable="true" id="carTransmission"
-                                spellcheck="false"><%= car.transmission %></h6>
+                                spellcheck="false"><%= car.transmission; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Condition : </h5>
                             <h6 class="d-inline" contenteditable="true" id="carCondition"
-                                spellcheck="false"><%= car.condition %></h6>
+                                spellcheck="false"><%= car.condition; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Odometer : </h5>
                             <h6 class="d-inline" contenteditable="true" id="carOdo"
-                                spellcheck="false"><%= car.odo %></h6>
+                                spellcheck="false"><%= car.odo; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Color : </h5>
                             <h6 class="d-inline " contenteditable="true" id="carColor"
-                                spellcheck="false"><%= car.color %></h6>
+                                spellcheck="false"><%= car.color; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Price : </h5>
                             <h6 class="d-inline " contenteditable="true" id="carPrice"
-                                spellcheck="false"><%= car.price %></h6>
+                                spellcheck="false"><%= car.price; %></h6>
                         </div>
                         <div class="mt-3">
                             <h5 class="d-inline features">Sale Date : </h5>
                             <h6 class="d-inline " contenteditable="true" id="carSaleDate"
-                                spellcheck="false"><%= car.saleDate %></h6>
+                                spellcheck="false"><%= car.saleDate; %></h6>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -221,7 +222,10 @@
       saleDate: document.getElementById('carSaleDate').innerText,
     };
 
-    data.year = parseInt(data.year);
+    console.log(data);
+
+
+    data.year = data.year * 1;
     if (isNaN(data.year)) {
       dataValidator.year = false;
       isOK = false;
@@ -234,18 +238,21 @@
       isOK = false;
     }
 
-    data.odo = parseInt(data.odo);
+    data.odo = data.odo * 1;
     if (isNaN(data.odo)) {
       dataValidator.odo = false;
       isOK = false;
 
     }
 
-    data.price = parseInt(data.price);
+    data.price = data.price * 1;
     if (isNaN(data.price)) {
-      dataValidator.odo = false;
+      dataValidator.price = false;
       isOK = false;
     }
+
+    console.log(data);
+
 
     try {
       data.saleDate = new Date(data.saleDate).toISOString();
@@ -271,7 +278,6 @@
         data: data
       };
 
-      console.log(data);
       try {
         const response = await axios(config);
         if (response) {

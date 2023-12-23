@@ -76,6 +76,12 @@
                         </div>
                     </div>
                     <!-- ***** Search End ***** -->
+                    <ul class="nav">
+                        <li><a href="/home" class="active">Home</a></li>
+                        <li><a href="/browse">Browse</a></li>
+                        <li><a href="/create-car">Create Car</a></li>
+                        <li><a href="/import">Import CSV</a></li>
+                    </ul>
                     <!-- ***** Menu Start ***** -->
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -101,7 +107,7 @@
                                 <h6>Welcome To Kiwi Cars</h6>
                                 <h4><em>Browse</em> Our Used Cars Here</h4>
                                 <div class="main-button">
-                                    <a href="browse">Browse Now</a>
+                                    <a href="/create-car">Create New Car</a>
                                 </div>
                             </div>
                         </div>
@@ -130,12 +136,20 @@
                                             </ul>
                                             <div>
                                                 <div class="main-button mt-2 fw-bold">
-                                                    <a href="/edit-car/<%= car.id %>" style="cursor:pointer;">Edit</a>
+                                                    <a carId="<%= car.id %>" style="cursor:pointer;"
+                                                       onclick="redirectFunction(this)">Edit</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 <% } %>
+
+                                <script>
+                                  function redirectFunction(element) {
+                                    const carId = element.getAttribute('carId');
+                                    window.location.assign('/edit-car/' + carId)
+                                  }
+                                </script>
 
                                 <div class="col-lg-12">
                                     <div class="main-button">

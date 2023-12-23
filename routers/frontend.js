@@ -62,6 +62,22 @@ router.get(
 );
 
 router.get(
+  '/import', async function (req, res) {
+    try {
+      const template = '/edit-car';
+      const pageTitle = 'Import Car CSV';
+      res.render('pages/import-csv', {
+        template,
+        pageTitle
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+);
+
+router.get(
   '/browse', async function (req, res) {
 
     try {

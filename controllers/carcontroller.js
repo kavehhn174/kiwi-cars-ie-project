@@ -108,6 +108,7 @@ const exportCSV = catchAsync(async (req, res, next) => {
 const loadCarDataToDB = catchAsync(async (req, res, next) => {
 
   const csvFilePath = './car_prices.csv';
+  // const csvFilePath = req.query.filePath;
   const csv = require('csvtojson');
   console.log('Loading CSV To Json ...');
 
@@ -119,9 +120,6 @@ const loadCarDataToDB = catchAsync(async (req, res, next) => {
     .fromFile(csvFilePath);
 
   const dbBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-
-  const loop_len = jsonArray.length;
-  const startTime = new Date();
 
   await Car.deleteMany();
   dbBar.start(jsonArray.length, 0);

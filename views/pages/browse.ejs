@@ -46,8 +46,58 @@
         color: #D2639D
     }
 </style>
+
+
 <!--Page Content-->
 <div class="container mt-5">
+    <div class="mb-5">
+        <header class="header-area header-sticky" style="position: relative!important;">
+            <div class="container">
+                <div class="row" x-data="{ searchResults: [], showSearchResults: false}">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="index.html" class="logo">
+                                <img src="/images/BigLogo.png"
+                                     style="max-height: 50px; height: auto; width: auto; margin-left: 50px"
+                                     alt="">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Search End ***** -->
+                            <div class="search-input" style="width: 100% !important;">
+                                <form id="search" action="#">
+                                    <input type="text" style="width: 100% !important;"
+                                           placeholder="Search Something Brand, Make, VIN"
+                                           id='searchText' name="searchKeyword"
+                                           @keyup="showSearchResults = showResultsState($el); searchResults = await updateSearchList($el)">
+                                    <i class="fa fa-search"></i>
+                                </form>
+                                <div class="bg-white rounded-4 p-3" x-transition x-show="showSearchResults">
+                                    <template x-for="car in searchResults">
+                                        <p x-text="car.vin + ' - ' + car.make + ' ' + car.model" class="m-3"></p>
+                                    </template>
+                                    <a onclick="showAllResults()" class="p-3" style="cursor:pointer;">Show all
+                                        results</a>
+                                </div>
+                            </div>
+                            <!-- ***** Search End ***** -->
+                            <ul class="nav">
+                                <li><a href="/home" class="active">Home</a></li>
+                                <li><a href="/browse">Browse</a></li>
+                                <li><a href="/create-car">Create Car</a></li>
+                                <li><a href="/import">Import CSV</a></li>
+                            </ul>
+                            <!-- ***** Menu Start ***** -->
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
     <h1 class="my-3">Browsing Cars</h1>
     <h3 class="my-3">Page <%= pageNumber %></h3>
     <% if (carSearch) { %>
